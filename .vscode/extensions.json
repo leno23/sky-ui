@@ -1,0 +1,16 @@
+{
+  "recommendations": [
+    "johnsoncodehk.volar",
+
+    "dbaeumer.vscode-eslint",
+
+    // 项目国际化时的效率插件
+    "lokalise.i18n-ally",
+
+    //使用iconify图标库时，把编辑器中的图标代码替换成图标展示，偶尔需要翻墙才能在编辑器中渲染
+    "antfu.iconify",
+
+    //.env文件配置代码高亮
+    "mikestead.dotenv"
+  ]
+}
