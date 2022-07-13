@@ -19,7 +19,7 @@ const onClick = () => {
       </div>
     </template>
   </Test>
-  <s-button type='primary'>按钮</s-button>
+  <s-button  type='primary' disabled>按钮</s-button>
   <!-- <Player/> -->
 </template>
 

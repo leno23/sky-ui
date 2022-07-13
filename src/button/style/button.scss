@@ -1,76 +1,12 @@
-// 圆角
-$s-border-radius: var(--s-border-radius, 2px);
-// 字体大小
-$s-font-size-md: var(--s-font-size-md, 12px);
-$s-animation-duration-slow: var(--s-animation-duration-slow, 300ms);
-$s-animation-ease-in-out-smooth: var(
-  --s-animation-ease-in-out-smooth,
-  cubic-bezier(0.645, 0.045, 0.355, 1)
-);
-
-$s-light-text: var(--s-light-text, #fff);
-// 主题色
-$s-primary: var(--s-primary, #5e7ce0);
-// 主题色鼠标悬停色
-$s-primary-hover: var(--s-primary-hover, #7693f5);
-// 主题色鼠标激活色
-$s-primary-active: var(--s-primary-active, #344899);
-// 文本颜色
-$s-text: var(--s-text, #252b3a);
-$s-block: var(--s-block, #fff);
-$s-line: var(--s-line, #abd0b8);
-$s-form-control-line-active: var(--s-form-control-line-active, #5e7ce0);
-// 品牌色激活色
-$s-brand-active: var(--s-brand-active, #526ecc);
-// 品牌色焦点色
-$s-brand-active-focus: var(--s-brand-active-focus, #344899);
+@use './button-config.scss';
+@import './button-base.scss';
 
 .s-btn {
-  @apply inline-flex items-center justify-center;
-  @apply border-[1px] border-solid border-transparent h-[28px] py-0 px-[20px] bg-transparent;
-  border-radius: $s-border-radius;
-
-  // 文本属性
-  @apply outline-0 leading-normal whitespace-nowrap cursor-pointer;
-  font-size: $s-font-size-md;
-  //   其他样式
-  transition: background-color $s-animation-duration-slow
-      $s-animation-ease-in-out-smooth,
-    border-color $s-animation-duration-slow $s-animation-ease-in-out-smooth,
-    color $s-animation-duration-slow $s-animation-ease-in-out-smooth;
-
-  // 主要样式
-  &.s-btn--primary {
-    color: $s-light-text;
-    background-color: $s-primary;
-    &:hover,
-    &:focus {
-      background-color: $s-primary-hover;
-    }
-    &:active {
-      background-color: $s-primary-active;
-    }
-  }
-//   次要按钮
-  &.s-btn--secondary {
-    color: $s-text;
-    background-color: $s-block;
-    border-color: $s-line;
-    &:hover,
-    &:focus,
-    &:active {
-      background-color: $s-form-control-line-active;
-      color: $s-brand-active;
-    }
-  }
-//   文字按钮
-  &.s-btn--text {
-    padding: 0;
-    color: $s-brand-active;
-    &:hover,
-    &:focus,
-    &:active {
-      color: $s-brand-active-focus;
-    }
-  }
+  @include button-base;
+  // 导入type相关的样式
+  @include button-variant(button-config.$type);
+  // 导入size相关的样式
+  @include button-variant(button-config.$size);
+  // 导入hover等伪类
+  @include button-variant(button-config.$pseudo, true);
 }
