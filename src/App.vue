@@ -19,7 +19,9 @@ const onClick = () => {
       </div>
     </template>
   </Test>
-  <s-button  type='primary' disabled>按钮</s-button>
+  <s-button  type='primary' size='small'>按钮</s-button>
+  <s-button  type='primary' size='medium'>中型按钮</s-button>
+  <s-button  type='primary' size='large'>大型按钮</s-button>
   <!-- <Player/> -->
 </template>
 
