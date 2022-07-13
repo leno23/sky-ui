@@ -31,15 +31,15 @@ export default defineComponent({
         
         return () => (
             <>
-                {slots?.title()}
+                <div>{slots?.title?.()}</div>
                 <div onClick={()=>console.log(111)}>
                     {/* 带修饰符的事件处理函数 */}
-                    <div class="w-20 inline-block hover:border-transparent cursor-pointer hover:shadow-lg text-sky-800 border border-red-800 px-2" onClick={withModifiers(inc,['self','stop'])}>test1</div>
+                    <div className="w-20 inline-block hover:border-transparent cursor-pointer hover:shadow-lg text-sky-800 border border-red-800 px-2" onClick={withModifiers(inc,['self','stop'])}>test1</div>
                     --
-                    <div class='font-bold underline text-3xl '>{count.value}</div>
+                    <div className='font-bold underline text-3xl '>{count.value}</div>
                     <input v-focus type="text" v-model={[count.value,'modelValue',['modifier','trim','lazy','number']]} />
                 </div>
-                {slots?.default()}
+                <div>{slots?.default?.()}</div>
             </>
         )
     }

@@ -10,8 +10,7 @@ const onClick = () => {
 </script>
 
 <template>
-  <img alt="Vue logo" src="./assets/logo.png" />
-  <HelloWorld msg="Hello Vue 3 + TypeScript + Vite" />
+  <!-- <HelloWorld msg="Hello Vue 3 + TypeScript + Vite" /> -->
   <Test @click='onClick'>
     <template #default>defaultContent</template>
     <template #title>
@@ -20,6 +19,7 @@ const onClick = () => {
       </div>
     </template>
   </Test>
+  <s-button type='primary'>按钮</s-button>
   <!-- <Player/> -->
 </template>
 
