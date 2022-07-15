@@ -2,6 +2,7 @@
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import vueJSX from '@vitejs/plugin-vue-jsx'
+import {resolve} from 'path'
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -12,5 +13,13 @@ export default defineConfig({
     transformMode: {
       web: [/.[tj]sx$/]
     }
+  },
+  resolve:{
+    alias:[
+      {
+        find:'@',
+        replacement:resolve(__dirname,'src')
+      }
+    ]
   }
 })
