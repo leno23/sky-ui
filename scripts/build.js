@@ -106,6 +106,9 @@ const buildLib = async () => {
             exec('rm -rf ./src/indexTmp.css')
             exec('rm -rf ./src/index.css.map')
             exec('rm -rf ./src/indexTmp.css.map')
+            let read = fs.createReadStream(resolve(__dirname,'../src/index.css') )
+            let out = fs.createWriteStream(resolve(__dirname,'../build/index.css'))
+            read.pipe(out)
         })
     })
     
