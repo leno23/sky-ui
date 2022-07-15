@@ -9,9 +9,9 @@ export default defineComponent({
     return () => {
       const blockCls = block.value ? 's-btn--block' : ''
       return (
-        <div class={`s-btn s-btn--${type.value}  s-btn--${size.value} ${blockCls} ${disabled.value && 'disabled'}`}>
-          {slots?.default?.()}
-        </div>
+        <button class={`s-btn s-btn--${type.value}  s-btn--${size.value} ${blockCls} ${disabled.value && 'disabled'}`}>
+          {slots?.default?.() || '按钮'}
+        </button>
       )
     }
   }
