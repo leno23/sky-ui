@@ -3,6 +3,7 @@ const vue = require('@vitejs/plugin-vue')
 const vueJsx = require('@vitejs/plugin-vue-jsx')
 const { resolve } = require('path')
 const fs = require('fs')
+const {exec} = require('child_process')
 const fsExtra = require('fs-extra')
 // 入口文件 出口文件
 const entryFile = resolve(__dirname, './entry.ts')
@@ -100,7 +101,15 @@ const buildAll = async () => {
 }
 
 const buildLib = async () => {
-  await buildAll()
+    exec('sass ./src/index.scss ./src/indexTmp.css',() => {
+        exec('tailwindcss -i ./src/indexTmp.css -o ./src/index.css',() => {
+            exec('rm -rf ./src/indexTmp.css')
+            exec('rm -rf ./src/index.css.map')
+            exec('rm -rf ./src/indexTmp.css.map')
+        })
+    })
+    
+    await buildAll()
     console.log(fs.readdirSync(componentsDir));
   //   按需打包
   fs.readdirSync(componentsDir)

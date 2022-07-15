@@ -5,10 +5,10 @@ export default defineConfig({
   plugins: [vueJsx({})],
   resolve:{
     alias:[
-      {
-        find:'@',
-        replacement:resolve(__dirname,'src')
-      }
+      // {
+      //   find:'@',
+      //   replacement:resolve(__dirname,'../src')
+      // }
     ]
   }
 })
