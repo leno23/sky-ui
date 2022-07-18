@@ -3,7 +3,7 @@ const vue = require('@vitejs/plugin-vue')
 const vueJsx = require('@vitejs/plugin-vue-jsx')
 const { resolve } = require('path')
 const fs = require('fs')
-const { exec } = require('child_process')
+const { exec, spawn, spawnSync } = require('child_process')
 const fsExtra = require('fs-extra')
 // 入口文件 出口文件
 const entryFile = resolve(__dirname, './entry.ts')
@@ -106,15 +106,19 @@ function cp(from, to) {
   read.pipe(out)
 }
 const buildLib = async () => {
-  exec('sass ./src/index.scss ./src/indexTmp.css', () => {
-    exec('tailwindcss -i ./src/indexTmp.css -o ./src/index.css', () => {
-      exec('rm -rf ./src/indexTmp.css')
-      exec('rm -rf ./src/index.css.map')
-      exec('rm -rf ./src/indexTmp.css.map')
-      cp('../src/index.css', '../build/index.css')
-      cp('../README.md', '../build/README.md')
-    })
-  })
+  let childProcess = spawn('sh', [
+    '-c',
+    `sass ./src/index.scss ./src/indexTmp.css &&
+     tailwindcss -i ./src/indexTmp.css -o ./src/index.css &&
+     rm -rf ./src/indexTmp.css ./src/index.css.map ./src/indexTmp.css.map`
+  ])
+
+  setTimeout(() => {
+    childProcess.kill()
+    cp('../src/index.css', '../build/index.css')
+    cp('../README.md', '../build/README.md')
+  }, 1000)
+  // })
 
   await buildAll()
   //   按需打包
