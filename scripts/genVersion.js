@@ -1,15 +1,24 @@
-const fs = require('fs')
+const fs = require('fs-extra')
 
 const pkg = require('../package.json')
+const min = require('minimist')
 
-function genVersion(){
-    
-    fs.writeFile('./package.json',JSON.stringify(pkg,null,2),(err) => {
-        if(err){
-            console.log('失败',err)
-        }else{
-            console.log('成功');
-        }
-    })
+let argvs = process.argv.slice(2)
+let { v } = min(argvs)
+if(v) pkg.version = v
+
+if (argvs) {
+    for (let x of argvs) {
+        let [key, value] = x.split('=')
+        pkg[key] = value
+    }
+}
+
+
+function genVersion() {
+    fs.writeJson('./package.json', pkg, { spaces: '\t' })
+        .then(() => {
+            console.log('版本更新成功！');
+        })
 }
 genVersion()
