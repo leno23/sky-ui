@@ -1,7 +1,7 @@
 {
   "name": "vue3-sky-ui",
   "private": true,
-  "version": "0.0.4",
+  "version": "0.0.2",
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc --noEmit && vite build",
@@ -12,7 +12,7 @@
     "docs:build": "vitepress build docs",
     "docs:serve": "vitepress serve docs",
     "test": "vitest",
-    "build:comps": "node ./scripts/genVersion && node ./scripts/build.js"
+    "build:components": "node ./scripts/build.js"
   },
   "dependencies": {
     "vue": "^3.2.25"
@@ -30,7 +30,6 @@
     "eslint-plugin-vue": "^9.0.1",
     "fs-extra": "^10.1.0",
     "happy-dom": "^6.0.3",
-    "minimist": "^1.2.6",
     "postcss": "^8.4.14",
     "sass": "^1.52.1",
     "stylelint": "^14.9.1",

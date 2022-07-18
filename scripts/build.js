@@ -3,7 +3,7 @@ const vue = require('@vitejs/plugin-vue')
 const vueJsx = require('@vitejs/plugin-vue-jsx')
 const { resolve } = require('path')
 const fs = require('fs')
-const {exec} = require('child_process')
+const { exec } = require('child_process')
 const fsExtra = require('fs-extra')
 // 入口文件 出口文件
 const entryFile = resolve(__dirname, './entry.ts')
@@ -100,20 +100,23 @@ const buildAll = async () => {
   createPackageJson()
 }
 
+function cp(from, to) {
+  let read = fs.createReadStream(resolve(__dirname, from))
+  let out = fs.createWriteStream(resolve(__dirname, to))
+  read.pipe(out)
+}
 const buildLib = async () => {
-    exec('sass ./src/index.scss ./src/indexTmp.css',() => {
-        exec('tailwindcss -i ./src/indexTmp.css -o ./src/index.css',() => {
-            exec('rm -rf ./src/indexTmp.css')
-            exec('rm -rf ./src/index.css.map')
-            exec('rm -rf ./src/indexTmp.css.map')
-            let read = fs.createReadStream(resolve(__dirname,'../src/index.css') )
-            let out = fs.createWriteStream(resolve(__dirname,'../build/index.css'))
-            read.pipe(out)
-        })
+  exec('sass ./src/index.scss ./src/indexTmp.css', () => {
+    exec('tailwindcss -i ./src/indexTmp.css -o ./src/index.css', () => {
+      exec('rm -rf ./src/indexTmp.css')
+      exec('rm -rf ./src/index.css.map')
+      exec('rm -rf ./src/indexTmp.css.map')
+      cp('../src/index.css', '../build/index.css')
+      cp('../README.md', '../build/README.md')
     })
-    
-    await buildAll()
-    console.log(fs.readdirSync(componentsDir));
+  })
+
+  await buildAll()
   //   按需打包
   fs.readdirSync(componentsDir)
     .filter(name => {
@@ -125,5 +128,4 @@ const buildLib = async () => {
       await buildSingle(name)
     })
 }
-
 buildLib()
